@@ -1,7 +1,6 @@
 import { createApp } from "vue";
 import HomePage from "./components/HomePage.vue";
 import store from "./store";
-
 // createApp(HomePage).use(store).mount("#app");
 // import { createApp } from 'vue'
 // import VueRouter from 'vue-router'
