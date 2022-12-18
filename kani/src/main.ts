@@ -12,6 +12,7 @@ import store from "./store";
 
 createApp(HomePage).use(store).mount("#app");
 
+//Kani
 // const router = new VueRouter({
 //   routes: [
 //     {
