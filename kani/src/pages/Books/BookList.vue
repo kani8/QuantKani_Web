@@ -1,4 +1,5 @@
 <template>
+  <div id="app">
     <div>
       <nav>
         <h2 @click="goToHome" class="logo">Quant<span>Kani</span></h2>
@@ -10,18 +11,17 @@
         <a href="#" class="btn"><i>hello</i></a>
       </nav>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    methods: {
-      goToHome() {
-        window.location.href = '/Kani/HTML/Home.html'
-      }
-    }
-  }
-  </script>
-  
-  <style src="../assets/css/style.css">
-  </style>
-  
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    goToHome() {
+      window.location.href = "/Kani/HTML/Home.html";
+    },
+  },
+};
+</script>
+
+<style src="../../assets/css/style.css"></style>

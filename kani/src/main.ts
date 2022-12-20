@@ -1,41 +1,41 @@
 import { createApp } from "vue";
-import HomePage from "./components/HomePage.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import HomePage from "./pages/Home/HomePage.vue";
+import Journey from "./pages/Journey/MyJourney.vue";
+import Lessons from "./pages/Lessons/LessonsPage.vue";
+import Books from "./pages/Books/BookList.vue";
+import App from "./App.vue";
 import store from "./store";
-// createApp(HomePage).use(store).mount("#app");
-// import { createApp } from 'vue'
-// import VueRouter from 'vue-router'
-// import HomePage from './components/HomePage.vue'
-// import Books from './components/Books.vue'
-// import Journey from './components/Journey.vue'
-// import Lessons from './components/Lessons.vue'
-// import store from './store'
 
-createApp(HomePage).use(store).mount("#app");
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: HomePage,
+    },
+    {
+      path: "/my-journey",
+      name: "journey",
+      component: Journey,
+    },
+    {
+      path: "/lessons",
+      name: "lessons",
+      component: Lessons,
+    },
+    {
+      path: "/books",
+      name: "books",
+      component: Books,
+    },
+  ],
+});
 
-//Kani
-// const router = new VueRouter({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'Home',
-//       component: HomePage
-//     },
-//     {
-//       path: '/books',
-//       name: 'Books',
-//       component: Books
-//     },
-//     {
-//       path: '/journey',
-//       name: 'Journey',
-//       component: Journey
-//     },
-//     {
-//       path: '/lessons',
-//       name: 'Lessons',
-//       component: Lessons
-//     }
-//   ]
-// })
+const app = createApp({
+  router,
+  store,
+});
 
-// createApp(HoMePage).use(router).mount('#app')
+createApp(App).use(router).mount("#app");

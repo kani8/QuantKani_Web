@@ -1,12 +1,12 @@
-const toggleButton = document.querySelector('.toggle-mode');
-const root = document.querySelector(':root');
+const toggleButton = document.querySelector(".toggle-mode");
+const root = document.querySelector(":root");
 
-toggleButton.addEventListener('click', () => {
-  if (root.classList.contains('light-mode')) {
-    root.classList.remove('light-mode');
-    root.classList.add('dark-mode');
+toggleButton.addEventListener("click", () => {
+  if (root.classList.contains("light-mode")) {
+    root.classList.remove("light-mode");
+    root.classList.add("dark-mode");
   } else {
-    root.classList.remove('dark-mode');
-    root.classList.add('light-mode');
+    root.classList.remove("dark-mode");
+    root.classList.add("light-mode");
   }
 });
