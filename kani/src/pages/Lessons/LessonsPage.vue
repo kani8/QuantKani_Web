@@ -2,11 +2,13 @@
   <div id="app">
     <div>
       <nav>
-        <h2 @click="goToHome" class="logo">Quant<span>Kani</span></h2>
+        <router-link to="/"
+          ><h2 class="logo">Quant<span>Kani</span></h2></router-link
+        >
         <ul>
-          <li><router-link to="Journey.vue">Journey</router-link></li>
-          <li><router-link to="Books.vue">Books</router-link></li>
-          <li><router-link to="Lessons.vue">Lessons</router-link></li>
+          <li><router-link to="/my-journey">Journey</router-link></li>
+          <li><router-link to="/books">Books</router-link></li>
+          <li><router-link to="/lessons">Lessons</router-link></li>
         </ul>
         <a href="#" class="btn"><i>hello</i></a>
       </nav>

@@ -1,13 +1,15 @@
 <template>
   <div>
     <nav>
-      <h2 @click="goToHome" class="logo">Quant<span>Kani</span></h2>
+      <router-link to="/"
+        ><h2 class="logo">Quant<span>Kani</span></h2></router-link
+      >
       <ul>
-        <li><a href="/Kani/HTML/Journey.html">Journey</a></li>
-        <li><a href="/Kani/HTML/Books.html">Books</a></li>
-        <li><a href="/Kani/HTML/Lessons.html">Lessons</a></li>
+        <li><router-link to="/my-journey">Journey</router-link></li>
+        <li><router-link to="/books">Books</router-link></li>
+        <li><router-link to="/lessons">Lessons</router-link></li>
       </ul>
-      <a href="#" class="toggle-mode"><i>hello</i></a>
+      <a href="#" class="btn"><i>hello</i></a>
     </nav>
 
     <section class="kani">
