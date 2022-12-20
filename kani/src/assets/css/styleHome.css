@@ -1,3 +1,18 @@
+#app {
+  font-family: "Montesrrat", sans-serif;
+  background-image: radial-gradient(circle at center, #ffffff, #ffffff);
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  align-items: center;
+  background: radial-gradient(ellipse at bottom, #ffffff, #000000);
+  font-weight: 300;
+  width: 100%;
+  margin: 0;
+}
 body {
   font-family: "Montesrrat", sans-serif;
   background-image: radial-gradient(circle at center, #ffffff, #ffffff);
@@ -10,6 +25,7 @@ body {
   align-items: center;
   background: radial-gradient(ellipse at bottom, #ffffff, #000000);
   font-weight: 300;
+  margin: 0;
 }
 
 .router {
@@ -65,7 +81,7 @@ body {
   border-radius: 10px;
   border: 1px solid #fff;
   box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.973);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s ease;
   transition-delay: 1s;
   position: relative;
@@ -98,7 +114,7 @@ body {
 }
 
 .left {
-  opacity: 0;
+  opacity: 1;
   background-size: 50%;
   transform: translateX(-30px) translateZ(-25px) rotateY(-5deg);
   background-image: url(../img/iconmonstr-map-10-240.png);
@@ -111,7 +127,7 @@ body {
 }
 
 .right {
-  opacity: 0;
+  opacity: 1;
   background-size: 50%;
   transform: translateX(30px) translateZ(-25px) rotateY(5deg);
   background-image: url(../img/iconmonstr-school-16-240.png);
@@ -138,7 +154,7 @@ body {
 }
 
 .ref {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   background-image: linear-gradient(
     to bottom,
     rgb(255, 255, 255),
