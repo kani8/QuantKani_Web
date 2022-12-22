@@ -6,15 +6,12 @@
       <router-link to="/books" class="center">
         <div class="explainer"><span>Ҝ</span></div>
       </router-link>
+
       <router-link to="/lessons" class="right">
         <div class="text"></div>
       </router-link>
     </div>
   </div>
 </template>
-
-<!-- <script lang="ts">
-export default {};
-</script> -->
 
 <style scoped src="../../assets/css/styleHome.css"></style>

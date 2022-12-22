@@ -9,7 +9,7 @@
         <li><router-link to="/books">Books</router-link></li>
         <li><router-link to="/lessons">Lessons</router-link></li>
       </ul>
-      <a href="#" class="btn"><i>hello</i></a>
+      <button @click="applyTheme">Toggle theme</button>
     </nav>
 
     <section class="kani">
@@ -21,15 +21,116 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { ref, onBeforeMount } from "vue";
+
+// Import the scroll and theme scripts
+import scroll from "../../assets/ts/scroll";
+import theme from "../../assets/ts/theme";
+
+// Import the script module
+import script from "../../assets/ts/script";
+
 export default {
-  methods: {
-    goToHome() {
-      this.$router.push("/Kani/HTML/Home.html");
-    },
+  setup() {
+    const count = ref(0);
+    const incrementCount = () => {
+      count.value++;
+    };
+
+    // Use the consoleText function imported from script.ts
+    const startConsoleText = () => {
+      script.consoleText(
+        ["Welcome", "My name is Kanishk Vatsavayi", "Explore"],
+        "text",
+        ["#fa0505", "#fa0505", "white"]
+      );
+    };
+
+    // Use the scroll functions imported from scroll.ts
+    const goToNextSection = () => {
+      scroll.next();
+    };
+    const goToPreviousSection = () => {
+      scroll.previous();
+    };
+
+    // Use the toggle function imported from theme.ts
+    const toggleTheme = () => {
+      theme();
+    };
+
+    // Use the onBeforeMount hook to start the console text animation immediately
+    onBeforeMount(() => {
+      startConsoleText();
+    });
+
+    return {
+      count,
+      incrementCount,
+      startConsoleText,
+      goToNextSection,
+      goToPreviousSection,
+      toggleTheme,
+    };
   },
 };
 </script>
+<!-- <script lang="ts">
+import { ref, onBeforeMount } from "vue";
+
+// Import the scroll and theme scripts
+import scroll from "src/assets/ts/scroll";
+import theme from "src/assets/ts/theme";
+
+// Import the script module
+import script from "src/assets/ts/script";
+
+export default {
+  setup() {
+    const count = ref(0);
+    const incrementCount = () => {
+      count.value++;
+    };
+
+    // Use the consoleText function imported from script.js
+    const startConsoleText = () => {
+      script.consoleText(
+        ["Welcome", "My name is Kanishk Vatsavayi", "Explore"],
+        "text",
+        ["#fa0505", "#fa0505", "white"]
+      );
+    };
+
+    // Use the scroll functions imported from scroll.js
+    const goToNextSection = () => {
+      scroll.next();
+    };
+    const goToPreviousSection = () => {
+      scroll.previous();
+    };
+
+    // Use the toggle function imported from theme.js
+    const toggleTheme = () => {
+      theme.toggle();
+    };
+
+    // Use the onBeforeMount hook to start the console text animation immediately
+    onBeforeMount(() => {
+      startConsoleText();
+    });
+
+    return {
+      count,
+      incrementCount,
+      startConsoleText,
+      goToNextSection,
+      goToPreviousSection,
+      toggleTheme,
+    };
+  },
+};
+</script> -->
 
 <style scoped src="../../assets/css/style.css"></style>
 
