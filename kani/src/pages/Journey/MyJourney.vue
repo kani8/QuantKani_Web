@@ -14,7 +14,7 @@
 
     <section class="kani">
       <div class="console-container">
-        <span id="text"> Kanishk Vatsavayi </span>
+        <span id="text"></span>
         <div class="console-underscore" id="console">&#95;</div>
       </div>
     </section>
@@ -22,6 +22,20 @@
 </template>
 
 <script lang="ts">
+import { consoleText } from "../../assets/ts/script";
+
+export default {
+  // other options
+  mounted: function () {
+    consoleText(
+      ["Welcome", "My name is Kanishk Vatsavayi", "Explore"],
+      "text",
+      ["#fa0505", "#fa0505", "white"]
+    );
+  },
+};
+</script>
+<!-- <script lang="ts">
 import { ref, onBeforeMount } from "vue";
 
 // Import the scroll and theme scripts
@@ -75,7 +89,7 @@ export default {
     };
   },
 };
-</script>
+</script> -->
 <!-- <script lang="ts">
 import { ref, onBeforeMount } from "vue";
 

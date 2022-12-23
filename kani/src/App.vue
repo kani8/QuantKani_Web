@@ -10,3 +10,14 @@
   text-decoration: 0;
 }
 </style>
+
+<script lang="ts">
+export default {
+  //...
+  mounted() {
+    const intro = document.createElement("script");
+    intro.setAttribute("src", "./assets/ts/script.ts");
+  },
+  //...
+};
+</script>
