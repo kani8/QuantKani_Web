@@ -12,14 +12,14 @@
       <button class="mode" @click="applyTheme"></button>
     </nav>
 
-    <section class="kani">
+    <section class="kani" ref="kani">
       <div class="console-container">
         <span id="text"></span>
         <div class="console-underscore" id="console">&#95;</div>
       </div>
     </section>
 
-    <section class="timeline"></section>
+    <section class="timeline" ref="timeline"></section>
   </div>
 </template>
 
