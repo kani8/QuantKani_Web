@@ -1,4 +1,4 @@
-const toggleButton = document.querySelector(".toggle-mode");
+const toggleButton = document.querySelector(".btn");
 const root = document.querySelector(":root");
 
 toggleButton.addEventListener("click", () => {

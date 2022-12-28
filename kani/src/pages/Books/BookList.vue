@@ -10,20 +10,22 @@
           <li><router-link to="/books">Books</router-link></li>
           <li><router-link to="/lessons">Lessons</router-link></li>
         </ul>
-        <a href="#" class="btn"><i>hello</i></a>
+        <button class="mode" @click="applyTheme"></button>
       </nav>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import toggle from "../../assets/ts/theme";
+import { ref } from "vue";
+
 export default {
   methods: {
-    goToHome() {
-      window.location.href = "/Kani/HTML/Home.html";
+    applyTheme() {
+      toggle();
     },
   },
 };
 </script>
-
-<style scoped src="../../assets/css/style.css"></style>
+<style src="../../assets/css/style.css"></style>

@@ -13,6 +13,11 @@
   width: 100%;
   margin: 0;
 }
+
+span {
+  color: rgb(11, 0, 0);
+}
+
 body {
   font-family: "Montesrrat", sans-serif;
   background-image: radial-gradient(circle at center, #ffffff, #ffffff);
