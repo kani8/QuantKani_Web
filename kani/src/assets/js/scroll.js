@@ -1,15 +1,18 @@
 // get all the sections on the page
-const sections = document.querySelectorAll('section');
+const sections = document.querySelectorAll("section");
 
 // track the current section index
 let currentSectionIndex = 0;
 
 // add a wheel event listener to the document
-document.addEventListener('wheel', (event) => {
+document.addEventListener("wheel", (event) => {
   // check if the user has scrolled up or down
   if (event.deltaY > 0) {
     // the user has scrolled down - scroll to the next section
-    currentSectionIndex = Math.min(currentSectionIndex + 1, sections.length - 1);
+    currentSectionIndex = Math.min(
+      currentSectionIndex + 1,
+      sections.length - 1
+    );
     const nextSection = sections[currentSectionIndex];
     window.scrollTo(0, nextSection.offsetTop);
   } else {
@@ -19,5 +22,3 @@ document.addEventListener('wheel', (event) => {
     window.scrollTo(0, previousSection.offsetTop);
   }
 });
-
-
