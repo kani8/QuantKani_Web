@@ -10,7 +10,7 @@
 
 /* Light mode */
 .light-mode {
-  --main-bg-color: rgb(238, 196, 107);
+  --main-bg-color: rgb(255, 249, 235);
   background: #fff;
   color: var(--color);
 }
@@ -92,6 +92,15 @@ nav {
   font-size: 35px;
   letter-spacing: 1px;
   cursor: pointer;
+  transition: color 0.5s;
+}
+
+.logo:hover {
+  color: #ee0707;
+}
+
+.logo:hover > span {
+  color: white;
 }
 
 /* Highlighted text */
@@ -114,16 +123,15 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #eb0808;
+  color: #ee0707;
   transition: 0.4s;
 }
 
 /* Button */
 .btn {
-  background-color: #f10707;
+  background-color: #ee0707;
   color: white;
   text-decoration: none;
-
   border: 2px solid transparent;
   font-weight: bold;
   padding: 10px 25px;
@@ -170,12 +178,18 @@ body {
   width: 600px;
   display: block;
   position: absolute;
-  color: white;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
+  color: white;
+}
+.dark-mode .console-container {
+  color: white;
+}
+.light-mode .console-container {
+  color: black;
 }
 
 /* Console underscore */

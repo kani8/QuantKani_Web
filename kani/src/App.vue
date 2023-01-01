@@ -9,11 +9,6 @@
   margin: 0;
   text-decoration: 0;
 }
-
-/* .scroll {
-  height:100%;
-  overflow-y: scroll; 
-}*/
 </style>
 
 <script lang="ts">

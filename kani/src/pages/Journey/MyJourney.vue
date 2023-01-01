@@ -5,7 +5,7 @@
         ><h2 class="logo">Quant<span>Kani</span></h2></router-link
       >
       <ul>
-        <li><router-link to="/my-journey">Journey</router-link></li>
+        <li><router-link to="/projects">Projects</router-link></li>
         <li><router-link to="/books">Books</router-link></li>
         <li><router-link to="/lessons">Lessons</router-link></li>
       </ul>
