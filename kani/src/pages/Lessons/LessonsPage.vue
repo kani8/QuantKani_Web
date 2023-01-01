@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import toggle from "../../assets/ts/theme";
-import { ref } from "vue";
 
 export default {
   methods: {

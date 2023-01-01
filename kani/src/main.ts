@@ -5,7 +5,6 @@ import Journey from "./pages/Journey/MyJourney.vue";
 import Lessons from "./pages/Lessons/LessonsPage.vue";
 import Books from "./pages/Books/BookList.vue";
 import App from "./App.vue";
-import store from "./store";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -31,11 +30,6 @@ const router = createRouter({
       component: Books,
     },
   ],
-});
-
-const app = createApp({
-  router,
-  store,
 });
 
 createApp(App).use(router).mount("#app");

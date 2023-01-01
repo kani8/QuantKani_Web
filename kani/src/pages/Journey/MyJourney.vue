@@ -26,22 +26,43 @@
 <script lang="ts">
 import { consoleText } from "../../assets/ts/script";
 import toggle from "../../assets/ts/theme";
-import { ref } from "vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
+  data() {
+    return {
+      tracker: 0,
+    };
+  },
   methods: {
     applyTheme() {
       toggle();
+      this.tracker++;
     },
   },
-  mounted: function () {
-    consoleText(
-      ["Welcome", "My name is Kanishk Vatsavayi", "Explore"],
-      "text",
-      ["#fa0505", "#fa0505", "white"]
-    );
+  computed: {
+    consoleMessage(): { texts: string[]; colors: string[] } {
+      const texts = ["Welcome", "My name is Kanishk Vatsavayi", "Explore"];
+      const colors =
+        this.tracker % 2 === 0
+          ? ["#fa0505", "#fa0505", "white"]
+          : ["black", "black", "black"];
+      return { texts, colors };
+    },
   },
-};
+  mounted() {
+    consoleText(this.consoleMessage.texts, "text", this.consoleMessage.colors);
+  },
+  watch: {
+    tracker() {
+      consoleText(
+        this.consoleMessage.texts,
+        "text",
+        this.consoleMessage.colors
+      );
+    },
+  },
+});
 </script>
 
 <style src="../../assets/css/style.css"></style>

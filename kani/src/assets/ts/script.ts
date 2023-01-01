@@ -1,18 +1,30 @@
-// declare module "src/assets/ts/script";
+let textInterval: number;
+let underscoreInterval: number;
 
-import { ref, onBeforeMount } from "vue";
-// function([string1, string2],target id,[color1,color2])
-// consoleText(["Welcome", "My name is Kanishk Vatsavayi", "Explore"], "text", [
-//   "#fa0505",
-//   "#fa0505",
-//   "white",
-// ]);
+let wordIndex = 0;
+let colorIndex = 0;
+let letterIndex = 0;
+let isWaiting = false;
 
 export function consoleText(
   words: string[],
   id: string,
   colors: string[] = ["#fff"]
 ) {
+  // Reset variables to initial values
+  wordIndex = 0;
+  colorIndex = 0;
+  letterIndex = 0;
+  isWaiting = false;
+
+  // Clear the previous intervals if they exist
+  if (textInterval) {
+    clearInterval(textInterval);
+  }
+  if (underscoreInterval) {
+    clearInterval(underscoreInterval);
+  }
+
   // Get the target element and set the initial color
   const target = document.getElementById(id);
   if (target) {
@@ -20,11 +32,7 @@ export function consoleText(
   }
 
   // Create an interval to update the text and colors
-  let wordIndex = 0;
-  let colorIndex = 0;
-  let letterIndex = 0;
-  let isWaiting = false;
-  setInterval(() => {
+  textInterval = setInterval(() => {
     if (isWaiting) {
       return;
     }
@@ -64,7 +72,7 @@ export function consoleText(
   // Create an interval to flash the underscore
   const underscore = document.getElementById("console");
   if (underscore) {
-    setInterval(() => {
+    underscoreInterval = setInterval(() => {
       if (underscore.className === "console-underscore hidden") {
         underscore.className = "console-underscore";
       } else {
