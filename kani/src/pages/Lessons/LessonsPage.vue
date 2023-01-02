@@ -16,16 +16,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import toggle from "../../assets/ts/theme";
-
-export default {
-  methods: {
-    applyTheme() {
-      toggle();
-    },
-  },
-};
-</script>
+<script lang="ts"></script>
 
 <style src="../../assets/css/style.css"></style>
