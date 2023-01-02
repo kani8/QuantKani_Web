@@ -6,7 +6,7 @@
           ><h2 class="logo">Quant<span>Kani</span></h2></router-link
         >
         <ul>
-          <li><router-link to="/my-journey">Journey</router-link></li>
+          <li><router-link to="/projects">Projects</router-link></li>
           <li><router-link to="/books">Books</router-link></li>
           <li><router-link to="/lessons">Lessons</router-link></li>
         </ul>
@@ -17,15 +17,21 @@
 </template>
 
 <script lang="ts">
-import toggle from "../../assets/ts/theme";
-import { ref } from "vue";
+import { defineComponent } from "vue";
+import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
 
-export default {
+export default defineComponent({
+  data() {
+    return {
+      tracker: 0,
+    };
+  },
   methods: {
     applyTheme() {
-      toggle();
+      toggleTheme();
+      this.tracker++;
     },
   },
-};
+});
 </script>
 <style src="../../assets/css/style.css"></style>
