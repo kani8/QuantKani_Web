@@ -1,20 +1,28 @@
-const toggleButton = document.querySelector(".btn");
+import { reactive } from "vue";
+
+const state = reactive({
+  theme: "dark",
+});
+
 const root = document.querySelector(":root");
 
-const toggle = () => {
+const setTheme = (theme: "light" | "dark") => {
+  state.theme = theme;
   if (root) {
-    if (root.classList.contains("light-mode")) {
-      root.classList.remove("light-mode");
-      root.classList.add("dark-mode");
-    } else {
+    if (theme === "light") {
       root.classList.remove("dark-mode");
       root.classList.add("light-mode");
+    } else {
+      root.classList.remove("light-mode");
+      root.classList.add("dark-mode");
     }
   }
 };
 
-if (toggleButton) {
-  toggleButton.addEventListener("click", toggle);
-}
+const toggleTheme = () => {
+  const theme = state.theme === "light" ? "dark" : "light";
+  setTheme(theme);
+};
 
-export default toggle;
+export default state;
+export { setTheme, toggleTheme };

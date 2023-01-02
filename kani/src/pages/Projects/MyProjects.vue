@@ -17,15 +17,22 @@
 </template>
 
 <script lang="ts">
-import toggle from "../../assets/ts/theme";
+import { defineComponent } from "vue";
+import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
 
-export default {
+export default defineComponent({
+  data() {
+    return {
+      tracker: 0,
+    };
+  },
   methods: {
     applyTheme() {
-      toggle();
+      toggleTheme();
+      this.tracker++;
     },
   },
-};
+});
 </script>
 
 <style src="../../assets/css/style.css"></style>

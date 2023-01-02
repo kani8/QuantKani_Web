@@ -22,42 +22,40 @@
 </template>
 
 <script lang="ts">
-import { consoleText } from "../../assets/ts/script";
-import toggle from "../../assets/ts/theme";
 import { defineComponent } from "vue";
+import { consoleText } from "../../assets/ts/script";
+import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
 
 export default defineComponent({
-  data() {
-    return {
-      tracker: 0,
-    };
-  },
-  methods: {
-    applyTheme() {
-      toggle();
-      this.tracker++;
-    },
-  },
-  computed: {
-    consoleMessage(): { texts: string[]; colors: string[] } {
-      const texts = ["Welcome", "My name is Kanishk Vatsavayi", "Explore"];
-      const colors =
-        this.tracker % 2 === 0
-          ? ["#fa0505", "#fa0505", "white"]
-          : ["black", "black", "black"];
-      return { texts, colors };
-    },
-  },
   mounted() {
+    if (!state.theme) {
+      setTheme("dark");
+    }
     consoleText(this.consoleMessage.texts, "text", this.consoleMessage.colors);
   },
-  watch: {
-    tracker() {
+
+  methods: {
+    applyTheme() {
+      toggleTheme();
       consoleText(
         this.consoleMessage.texts,
         "text",
         this.consoleMessage.colors
       );
+    },
+  },
+  computed: {
+    consoleMessage(): { texts: string[]; colors: string[] } {
+      const texts = ["Welcome", "My name is Kanishk Vatsavayi", "Explore"];
+      let colors;
+      if (state.theme === "light") {
+        colors = ["black", "black", "black"];
+      } else if (state.theme === "dark") {
+        colors = ["#fa0505", "#fa0505", "white"];
+      } else {
+        colors = ["#fa0505", "#fa0505", "white"]; // default value
+      }
+      return { texts, colors };
     },
   },
 });
