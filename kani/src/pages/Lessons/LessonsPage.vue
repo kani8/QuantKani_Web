@@ -16,6 +16,23 @@
   </div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+
+export default defineComponent({
+  data() {
+    return {
+      tracker: 0,
+    };
+  },
+  methods: {
+    applyTheme() {
+      toggleTheme();
+      this.tracker++;
+    },
+  },
+});
+</script>
 
 <style src="../../assets/css/style.css"></style>
