@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+import { toggleTheme } from "../../assets/ts/theme";
 
 export default defineComponent({
   data() {

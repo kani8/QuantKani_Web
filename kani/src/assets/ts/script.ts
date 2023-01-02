@@ -16,7 +16,6 @@ export function consoleText(
   colorIndex = 0;
   letterIndex = 0;
   isWaiting = false;
-
   // Clear the previous intervals if they exist
   if (textInterval) {
     clearInterval(textInterval);
