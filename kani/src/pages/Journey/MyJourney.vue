@@ -18,8 +18,6 @@
         <div class="console-underscore" id="console">&#95;</div>
       </div>
     </section>
-
-    <section class="timeline" ref="timeline"></section>
   </div>
 </template>
 
