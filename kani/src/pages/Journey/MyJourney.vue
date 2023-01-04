@@ -9,7 +9,11 @@
         <li><router-link to="/books">Books</router-link></li>
         <li><router-link to="/lessons">Lessons</router-link></li>
       </ul>
-      <button class="mode" @click="applyTheme"></button>
+      <button
+        class="mode"
+        aria-label="Switch Theme"
+        @click="applyTheme"
+      ></button>
     </nav>
 
     <section class="kani" ref="kani">
