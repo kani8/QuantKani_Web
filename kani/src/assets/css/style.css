@@ -37,11 +37,6 @@
   background-image: url("../img/sun.png");
 }
 
-/* Timeline */
-.timeline {
-  height: 100vh;
-  width: 100%;
-}
 /* Scrollbar */
 ::-webkit-scrollbar {
   display: none;
@@ -64,7 +59,7 @@ html {
 
 /* Kani section */
 .kani {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: var(--main-bg-color);
   background-size: cover;
@@ -81,9 +76,13 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding-top: 45px;
-  padding-left: 100px; /* shift items to the left */
+  padding-left: 100px; /* shift center items to the left just a little */
   padding-right: 8%;
   padding-bottom: 40px;
+}
+
+.sub-nav {
+  top:0;
 }
 
 /* Logo */
