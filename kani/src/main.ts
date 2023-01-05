@@ -5,6 +5,8 @@ import Projects from "./pages/Projects/MyProjects.vue";
 import Lessons from "./pages/Lessons/LessonsPage.vue";
 import Books from "./pages/Books/BookList.vue";
 import App from "./App.vue";
+import { Quasar } from "quasar";
+import quasarUserOptions from "./quasar-user-options";
 const DEFAULT_TITLE = "QK";
 
 const router = createRouter({
@@ -49,4 +51,4 @@ router.afterEach((to) => {
   document.title = (to.meta.title as string) || DEFAULT_TITLE;
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(Quasar, quasarUserOptions).use(router).mount("#app");
