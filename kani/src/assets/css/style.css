@@ -66,93 +66,36 @@ html {
   background-position: center;
 }
 
-/* Navigation bar */
-nav {
-  z-index: 999;
-  position: sticky;
-  top: 0;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 45px;
-  padding-left: 100px; /* shift center items to the left just a little */
-  padding-right: 8%;
-  padding-bottom: 40px;
-}
-
-.sub-nav {
-  top: 0;
-}
-
-/* Logo */
-.logo {
+.q-tab__label {
   color: white;
-  font-size: 35px;
-  letter-spacing: 1px;
-  cursor: pointer;
   transition: color 0.5s;
 }
 
-.logo:hover {
-  color: #ee0707;
+.q-tab__label:hover {
+  color: red;
 }
 
-.logo:hover > span {
-  color: white;
+.heading {
+  transition: color 0.5s;
+  font-size: 2em !important;
+  font-weight: 600 !important;
 }
 
-/* Highlighted text */
-span {
-  color: #ee0707;
+.heading:hover {
+  color: red;
 }
 
-/* Navigation links */
-nav ul li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 10px 25px;
+.heading > span {
+  color: red;
 }
 
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: capitalize;
+.heading:hover > span {
+  color:white;
 }
 
-nav ul li a:hover {
-  color: #ee0707;
-  transition: 0.4s;
-}
-
-/* Button */
-.btn {
-  background-color: #ee0707;
-  color: white;
-  text-decoration: none;
-  border: 2px solid transparent;
-  font-weight: bold;
-  padding: 10px 25px;
-  border-radius: 30px;
-  transition: transform 0.4s;
-}
-
-/* Mode toggle button */
-.mode {
-  opacity: 1;
-  background-color: transparent;
-  transform: scale(0.5);
-  transition: transform 0.2s ease-in-out;
-}
-
-.mode:hover {
-  transform: scale(0.6);
-}
-
-/* Button hover effect */
-.btn:hover {
-  transform: scale(1.2);
+.q-toolbar__title:first-child {
+  padding-top: 1em;
+  padding-left: 2em !important;
 }
 
 /* Import font */
