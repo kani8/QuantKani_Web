@@ -75,27 +75,28 @@ html {
   color: red;
 }
 
-.heading {
+.logo {
   transition: color 0.5s;
-  font-size: 2em !important;
   font-weight: 600 !important;
+  color:white;
 }
 
-.heading:hover {
+.logo:hover {
   color: red;
 }
 
-.heading > span {
+.logo > span {
   color: red;
 }
 
-.heading:hover > span {
+.logo:hover > span {
   color:white;
 }
 
 .q-toolbar__title:first-child {
-  padding-top: 1em;
+  padding-top: .9em;
   padding-left: 2em !important;
+  font-size: 2.3em;
 }
 
 /* Import font */
@@ -107,7 +108,8 @@ body {
 }
 
 /* Hidden elements */
-.hidden {
+.console-container > .hidden {
+  
   opacity: 0;
 }
 
@@ -138,6 +140,7 @@ body {
 .console-underscore {
   display: inline-block;
   position: relative;
+  width: 0;
   top: -0.14em;
   left: 10px;
 }

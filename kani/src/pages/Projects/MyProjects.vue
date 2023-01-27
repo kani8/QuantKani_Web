@@ -3,8 +3,11 @@
     <q-header elevated class="bg-black text-white shadow-2">
       <q-toolbar>
         <q-toolbar-title class="heading"
-          >Quant<span>Kani</span></q-toolbar-title
+          ><router-link class="logo" to="/"
+            >Quant<span>Kani</span></router-link
+          ></q-toolbar-title
         >
+
         <q-btn
           flat
           round
