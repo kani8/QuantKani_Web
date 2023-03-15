@@ -1,37 +1,40 @@
-let textInterval: number;
-let underscoreInterval: number;
-
 let wordIndex = 0;
 let colorIndex = 0;
 let letterIndex = 0;
 let isWaiting = false;
+let target: HTMLElement | null;
+let colors: string[];
+
+export function changeColor(newColors: string[]) {
+  if (!target) {
+    return;
+  }
+
+  // Update the colors array and set the current color
+  colors = newColors;
+  target.setAttribute("style", `color:${colors[colorIndex]}`);
+}
 
 export function consoleText(
   words: string[],
   id: string,
-  colors: string[] = ["#fff"]
+  initialColors: string[] = ["#fff"]
 ) {
+  colors = initialColors;
   // Reset variables to initial values
   wordIndex = 0;
   colorIndex = 0;
   letterIndex = 0;
   isWaiting = false;
-  // Clear the previous intervals if they exist
-  if (textInterval) {
-    clearInterval(textInterval);
-  }
-  if (underscoreInterval) {
-    clearInterval(underscoreInterval);
-  }
 
   // Get the target element and set the initial color
-  const target = document.getElementById(id);
+  target = document.getElementById(id);
   if (target) {
     target.setAttribute("style", `color:${colors[0]}`);
   }
 
   // Create an interval to update the text and colors
-  textInterval = setInterval(() => {
+  setInterval(() => {
     if (isWaiting) {
       return;
     }
@@ -71,7 +74,7 @@ export function consoleText(
   // Create an interval to flash the underscore
   const underscore = document.getElementById("console");
   if (underscore) {
-    underscoreInterval = setInterval(() => {
+    setInterval(() => {
       if (underscore.className === "console-underscore hidden") {
         underscore.className = "console-underscore";
       } else {
@@ -83,4 +86,5 @@ export function consoleText(
 
 export default {
   consoleText,
+  changeColor,
 };
