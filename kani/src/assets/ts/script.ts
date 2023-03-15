@@ -4,6 +4,8 @@ let letterIndex = 0;
 let isWaiting = false;
 let target: HTMLElement | null;
 let colors: string[];
+let textInterval: number | null = null;
+let underscoreInterval: number | null = null;
 
 export function changeColor(newColors: string[]) {
   if (!target) {
@@ -34,7 +36,10 @@ export function consoleText(
   }
 
   // Create an interval to update the text and colors
-  setInterval(() => {
+  if (textInterval !== null) {
+    clearInterval(textInterval);
+  }
+  textInterval = window.setInterval(() => {
     if (isWaiting) {
       return;
     }
@@ -72,6 +77,7 @@ export function consoleText(
   }, 150);
 
   // Create an interval to flash the underscore
+
   const underscore = document.getElementById("console");
   if (underscore) {
     setInterval(() => {
@@ -84,7 +90,19 @@ export function consoleText(
   }
 }
 
+export function clearIntervals() {
+  if (textInterval !== null) {
+    clearInterval(textInterval);
+    textInterval = null;
+  }
+  if (underscoreInterval !== null) {
+    clearInterval(underscoreInterval);
+    underscoreInterval = null;
+  }
+}
+
 export default {
   consoleText,
   changeColor,
+  clearIntervals,
 };

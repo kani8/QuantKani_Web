@@ -115,7 +115,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { consoleText, changeColor } from "../../assets/ts/script";
+import {
+  consoleText,
+  changeColor,
+  clearIntervals,
+} from "../../assets/ts/script";
 import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
 
 export default defineComponent({
@@ -148,6 +152,9 @@ export default defineComponent({
           : ["#fa0505", "#fa0505", "white"];
       return { texts, colors };
     },
+  },
+  beforeUnmount() {
+    clearIntervals();
   },
 });
 </script>
