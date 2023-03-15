@@ -146,14 +146,10 @@ export default defineComponent({
   computed: {
     consoleMessage(): { texts: string[]; colors: string[] } {
       const texts = ["Welcome", "My name is Kanishk Vatsavayi", "Explore"];
-      let colors;
-      if (state.theme === "light") {
-        colors = ["black", "black", "black"];
-      } else if (state.theme === "dark") {
-        colors = ["#fa0505", "#fa0505", "white"];
-      } else {
-        colors = ["#fa0505", "#fa0505", "white"]; // default value
-      }
+      let colors =
+        state.theme === "light"
+          ? ["black", "black", "black"]
+          : ["#fa0505", "#fa0505", "white"];
       return { texts, colors };
     },
   },

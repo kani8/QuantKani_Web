@@ -8,20 +8,16 @@
   width: 100%;
 }
 
-/* Light mode */
 .light-mode {
   --main-bg-color: rgb(255, 249, 235);
-  background: #fff;
   color: var(--color);
 }
 
 /* Dark mode */
 .dark-mode {
   --main-bg-color: #111;
-  background: #111;
   color: #fff;
 }
-
 /* Mode toggle button */
 .mode {
   height: 48px;
@@ -78,7 +74,7 @@ html {
 .logo {
   transition: color 0.5s;
   font-weight: 600 !important;
-  color:white;
+  color: white;
 }
 
 .logo:hover {
@@ -90,11 +86,11 @@ html {
 }
 
 .logo:hover > span {
-  color:white;
+  color: white;
 }
 
 .q-toolbar__title:first-child {
-  padding-top: .9em;
+  padding-top: 0.9em;
   padding-left: 2em !important;
   font-size: 2.3em;
 }
@@ -104,12 +100,18 @@ html {
 
 /* Body */
 body {
-  background: #111;
+  background-color: #111;
+}
+.light-mode body {
+  background-color: #fff;
+}
+
+.dark-mode body {
+  background-color: #111;
 }
 
 /* Hidden elements */
 .console-container > .hidden {
-  
   opacity: 0;
 }
 
@@ -127,7 +129,6 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  color: white;
 }
 .dark-mode .console-container {
   color: white;
