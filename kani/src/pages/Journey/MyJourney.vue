@@ -33,7 +33,7 @@
     </q-header>
     <q-drawer
       v-model="drawer"
-      side="right"
+      side="left"
       bordered
       :width="250"
       class="bg-black text-white"
@@ -87,6 +87,7 @@ export default defineComponent({
     return {
       drawer: false,
       tab: 0,
+      breakpoint: 768 // Set the breakpoint for the width threshold, e.g., 768px for tablets
     };
   },
   mounted() {
