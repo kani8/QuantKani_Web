@@ -115,7 +115,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { consoleText } from "../../assets/ts/script";
+import { consoleText, changeColor } from "../../assets/ts/script";
 import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
 
 export default defineComponent({
@@ -136,11 +136,7 @@ export default defineComponent({
   methods: {
     applyTheme() {
       toggleTheme();
-      consoleText(
-        this.consoleMessage.texts,
-        "text",
-        this.consoleMessage.colors
-      );
+      changeColor(this.consoleMessage.colors);
     },
   },
   computed: {
