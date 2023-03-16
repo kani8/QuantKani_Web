@@ -7,7 +7,9 @@
     >
       <q-toolbar>
         <q-toolbar-title class="heading">
-          <router-link class="logo" to="/"> Quant<span>Kani</span></router-link>
+          <router-link class="logo drawer-item-logo" to="/">
+            Quant<span>Kani</span>
+          </router-link>
         </q-toolbar-title>
 
         <q-btn
@@ -28,7 +30,7 @@
           flat
           round
           dense
-          class="q-ma-xs"
+          class="q-ma-xs theme-toggle"
           @click="applyTheme"
           aria-label="Toggle Theme"
         >
@@ -38,7 +40,7 @@
       <q-tabs
         v-model="tab"
         class="pages"
-        :style="$q.screen.width < breakpoint ? { display: 'none' } : {}"
+        :style="$q.screen.gt.xs ? {} : { display: 'none' }"
       >
         <router-link to="/projects">
           <q-tab name="Projects" label="Projects"></q-tab>
@@ -55,58 +57,44 @@
       v-model="drawer"
       side="left"
       bordered
-      :width="250"
+      :width="180"
       class="bg-black text-white"
       hide-on-escape
     >
-      <q-list link style="font-size: 18px">
-        <q-item @click="drawer = !drawer">
-          <q-item-side>
-            <q-icon name="home" color="white" />
-          </q-item-side>
-          <q-item-main>
-            <router-link to="/" class="text-white">Home</router-link>
-          </q-item-main>
+      <q-list link style="font-size: 1.5em">
+        <q-item
+          v-for="(item, index) in drawerItems"
+          :key="index"
+          class="drawer-item"
+        >
+          <q-item-section side>
+            <router-link :to="item.link">
+              <div class="icon-container drawer-item-logo">
+                <q-icon :name="item.icon" color="white" />
+                <span class="drawer-item-description">{{
+                  item.description
+                }}</span>
+              </div>
+            </router-link>
+          </q-item-section>
         </q-item>
-        <q-item @click="drawer = !drawer">
-          <q-item-side>
-            <q-icon name="folder" color="white" />
-          </q-item-side>
-          <q-item-main>
-            <router-link to="/projects" class="text-white"
-              >Projects</router-link
-            >
-          </q-item-main>
-        </q-item>
-        <q-item @click="drawer = !drawer">
-          <q-item-side>
-            <q-icon name="book" color="white" />
-          </q-item-side>
-          <q-item-main>
-            <router-link to="/books" class="text-white">Books</router-link>
-          </q-item-main>
-        </q-item>
-        <q-item @click="drawer = !drawer">
-          <q-item-side>
-            <q-icon name="school" color="white" />
-          </q-item-side>
-          <q-item-main>
-            <router-link to="/lessons" class="text-white">Lessons</router-link>
-          </q-item-main>
-        </q-item>
-        <q-item @click="applyTheme">
-          <q-item-side>
-            <q-icon name="brightness_medium" color="white" />
-          </q-item-side>
-          <q-item-main label="Toggle Theme" />
+        <!-- Add the Toggle Theme button in the drawer -->
+        <q-item class="drawer-item theme-toggle-drawer-item">
+          <q-item-section side>
+            <div class="switch" @click="applyTheme">
+              <q-icon name="brightness_medium" color="white" />
+            </div>
+          </q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
     <q-page-container class="q-pa-md q-ma-md">
       <section class="kani" ref="kani">
         <div class="console-container">
-          <span id="text"></span>
-          <div class="console-underscore" id="console">&#95;</div>
+          <div class="console-wrapper">
+            <span id="text"></span>
+            <div class="console-underscore" id="console">&#95;</div>
+          </div>
         </div>
       </section>
     </q-page-container>
@@ -128,8 +116,35 @@ export default defineComponent({
       drawer: false,
       tab: 0,
       breakpoint: 768, // Set the breakpoint for the width threshold, e.g., 768px for tablets
+      drawerItems: [
+        {
+          title: "Home",
+          link: "/",
+          icon: "home",
+          description: "Home",
+        },
+        {
+          title: "Projects",
+          link: "/projects",
+          icon: "folder",
+          description: "Projects",
+        },
+        {
+          title: "Books",
+          link: "/books",
+          icon: "book",
+          description: "Books",
+        },
+        {
+          title: "Lessons",
+          link: "/lessons",
+          icon: "school",
+          description: "Lessons",
+        },
+      ],
     };
   },
+
   mounted() {
     if (!state.theme) {
       setTheme("dark");
