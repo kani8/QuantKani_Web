@@ -40,7 +40,7 @@
       <q-tabs
         v-model="tab"
         class="pages"
-        :style="$q.screen.gt.xs ? {} : { display: 'none' }"
+        :style="$q.screen.width > breakpoint ? {} : { display: 'none' }"
       >
         <router-link to="/projects">
           <q-tab name="Projects" label="Projects"></q-tab>
