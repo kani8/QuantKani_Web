@@ -13,7 +13,7 @@
         </q-toolbar-title>
 
         <q-btn
-          v-if="$q.screen.width < breakpoint"
+          v-if="$q.screen.width <= breakpoint"
           flat
           round
           dense
@@ -78,7 +78,6 @@
             </router-link>
           </q-item-section>
         </q-item>
-        <!-- Add the Toggle Theme button in the drawer -->
         <q-item class="drawer-item theme-toggle-drawer-item">
           <q-item-section side>
             <div class="switch" @click="applyTheme">
@@ -115,7 +114,7 @@ export default defineComponent({
     return {
       drawer: false,
       tab: 0,
-      breakpoint: 768, // Set the breakpoint for the width threshold, e.g., 768px for tablets
+      breakpoint: 768, // Sets the breakpoint for the width threshold, e.g., 768px for tablets
       drawerItems: [
         {
           title: "Home",

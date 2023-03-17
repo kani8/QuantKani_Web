@@ -238,11 +238,11 @@ body {
 }
 
 .switch {
-  transform: scale(1.5); /* Changed from 0.8 to 1.8 */
+  transform: scale(1.5);
 }
 
 .switch:hover {
-  transform: scale(1.8); /* Changed from 0.8 to 1.8 */
+  transform: scale(1.8);
   transition: transform 0.3s, color 0.3s;
   color: red !important;
 }
@@ -258,7 +258,6 @@ body {
   z-index: 1000;
 }
 
-/* Add this to your CSS file or style section */
 .theme-toggle-drawer-item:hover .drawer-item-logo {
   opacity: 0.7;
 }
