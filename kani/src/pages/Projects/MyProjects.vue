@@ -78,7 +78,6 @@
             </router-link>
           </q-item-section>
         </q-item>
-        <!-- Add the Toggle Theme button in the drawer -->
         <q-item class="drawer-item theme-toggle-drawer-item">
           <q-item-section side>
             <div class="switch" @click="applyTheme">

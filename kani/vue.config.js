@@ -1,6 +1,17 @@
 const { defineConfig } = require("@vue/cli-service");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
 module.exports = defineConfig({
   transpileDependencies: ["quasar"],
+
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+    },
+  },
 
   pluginOptions: {
     quasar: {
@@ -9,14 +20,3 @@ module.exports = defineConfig({
     },
   },
 });
-
-// const { defineConfig } = require("@vue/cli-service");
-// module.exports = defineConfig({
-//   transpileDependencies: true,
-//   configureWebpack: {
-//     entry: ['./script.js', './theme.js', './scroll.js'],
-//     output: {
-//       filename: 'combined-scripts.js'
-//     }
-//   }
-// });
