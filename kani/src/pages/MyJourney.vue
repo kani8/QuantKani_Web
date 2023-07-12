@@ -19,7 +19,6 @@
           dense
           class="q-ma-xs"
           @click="drawer = !drawer"
-          aria-label="Toggle Sidebar"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -32,7 +31,6 @@
           dense
           class="q-ma-xs theme-toggle"
           @click="applyTheme"
-          aria-label="Toggle Theme"
         >
           <q-icon name="brightness_medium" />
         </q-btn>
@@ -59,9 +57,8 @@
       bordered
       :width="180"
       class="bg-black text-white"
-      hide-on-escape
     >
-      <q-list link style="font-size: 1.5em">
+      <q-list style="font-size: 1.5em">
         <q-item
           v-for="(item, index) in drawerItems"
           :key="index"
@@ -102,12 +99,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import {
-  consoleText,
-  changeColor,
-  clearIntervals,
-} from "../../assets/ts/script";
-import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+import { consoleText, changeColor, clearIntervals } from "../assets/ts/script";
+import state, { setTheme, toggleTheme } from "../assets/ts/theme";
 
 export default defineComponent({
   data() {
@@ -173,4 +166,4 @@ export default defineComponent({
 });
 </script>
 
-<style src="../../assets/css/style.css"></style>
+<style src="../assets/css/style.css"></style>

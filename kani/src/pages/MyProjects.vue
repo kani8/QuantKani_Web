@@ -12,6 +12,24 @@
           </router-link>
         </q-toolbar-title>
 
+        <!-- Sign In Button -->
+        <!-- Sign In Button -->
+        <q-btn
+          v-if="!loggedIn && $q.screen.width >= breakpoint"
+          flat
+          round
+          dense
+          class="q-ma-xs sign-in-btn"
+          label="Sign In"
+          @click="signIn"
+        ></q-btn>
+        <!-- User's name -->
+        <span
+          v-if="loggedIn && $q.screen.width >= breakpoint"
+          class="user-name"
+        >
+          {{ user.value.name }}
+        </span>
         <q-btn
           v-if="$q.screen.width < breakpoint"
           flat
@@ -19,7 +37,6 @@
           dense
           class="q-ma-xs"
           @click="drawer = !drawer"
-          aria-label="Toggle Sidebar"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -32,15 +49,15 @@
           dense
           class="q-ma-xs theme-toggle"
           @click="applyTheme"
-          aria-label="Toggle Theme"
         >
           <q-icon name="brightness_medium" />
         </q-btn>
       </q-toolbar>
+
       <q-tabs
         v-model="tab"
         class="pages"
-        :style="$q.screen.gt.xs ? {} : { display: 'none' }"
+        :style="$q.screen.width > breakpoint ? {} : { display: 'none' }"
       >
         <router-link to="/projects">
           <q-tab name="Projects" label="Projects"></q-tab>
@@ -87,19 +104,22 @@
         </q-item>
       </q-list>
     </q-drawer>
+    <Admin v-if="isAdmin.value" />
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+import { defineComponent, ref, computed } from "vue";
+import Admin from "./Admin.vue";
+import state, { setTheme, toggleTheme } from "../assets/ts/theme";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   data() {
     return {
       drawer: false,
       tab: 0,
-      breakpoint: 768, // Set the breakpoint for the width threshold, e.g., 768px for tablets
+      breakpoint: 768, // Sets the breakpoint for the width threshold, e.g., 768px for tablets
       drawerItems: [
         {
           title: "Home",
@@ -125,7 +145,41 @@ export default defineComponent({
           icon: "school",
           description: "Lessons",
         },
+        {
+          title: "Sign In",
+          link: "/signin",
+          icon: "login",
+          description: "Sign In",
+        },
       ],
+    };
+  },
+  components: {
+    Admin,
+  },
+  setup() {
+    const loggedIn = ref(false);
+    const user = ref({ role: "guest" }); // Add a ref for the user object
+    const router = useRouter();
+
+    const isAdmin = computed(
+      () => loggedIn.value && user.value.role === "admin"
+    );
+
+    const applyTheme = () => {
+      toggleTheme();
+    };
+
+    const signIn = () => {
+      router.push("/signin");
+    };
+
+    return {
+      loggedIn,
+      isAdmin,
+      applyTheme,
+      signIn,
+      user,
     };
   },
 
@@ -134,13 +188,7 @@ export default defineComponent({
       setTheme("dark");
     }
   },
-
-  methods: {
-    applyTheme() {
-      toggleTheme();
-    },
-  },
 });
 </script>
 
-<style src="../../assets/css/style.css"></style>
+<style src="../assets/css/style.css"></style>

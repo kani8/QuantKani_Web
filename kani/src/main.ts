@@ -1,9 +1,10 @@
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
-import Journey from "./pages/Journey/MyJourney.vue";
-import Projects from "./pages/Projects/MyProjects.vue";
-import Lessons from "./pages/Lessons/LessonsPage.vue";
-import Books from "./pages/Books/BookList.vue";
+import Journey from "./pages/MyJourney.vue";
+import Projects from "./pages/MyProjects.vue";
+import Lessons from "./pages/LessonsPage.vue";
+import Books from "./pages/BookList.vue";
+import Signin from "./pages/SignIn.vue";
 import App from "./App.vue";
 import { Quasar } from "quasar";
 import quasarUserOptions from "./quasar-user-options";
@@ -43,6 +44,11 @@ const router = createRouter({
       meta: {
         title: "Books",
       },
+    },
+    {
+      path: "/signin",
+      name: "Signin",
+      component: Signin,
     },
   ],
 });

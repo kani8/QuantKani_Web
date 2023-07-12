@@ -286,3 +286,61 @@ body {
 a:-webkit-any-link {
   text-decoration: none !important;
 }
+
+.sign-in-btn {
+  margin-right: 1rem;
+}
+
+.user-name {
+  margin-right: 1rem;
+}
+
+.signin-container {
+  /* Add your styling for the sign-in container */
+  background-color: var(--main-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-group {
+  /* Add your styling for the form group */
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #444;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+.register-btn {
+  margin-left: 1rem;
+  background-color: #007bff;
+}
+
+.register-btn:hover {
+  background-color: #0069d9;
+}
