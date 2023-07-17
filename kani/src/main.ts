@@ -5,6 +5,8 @@ import Projects from "./pages/MyProjects.vue";
 import Lessons from "./pages/LessonsPage.vue";
 import Books from "./pages/BookList.vue";
 import Signin from "./pages/SignIn.vue";
+import RegisterUser from "./pages/RegisterUser.vue";
+import ForgotPassword from "./pages/ForgotPassword.vue";
 import App from "./App.vue";
 import { Quasar } from "quasar";
 import quasarUserOptions from "./quasar-user-options";
@@ -49,6 +51,16 @@ const router = createRouter({
       path: "/signin",
       name: "Signin",
       component: Signin,
+    },
+    {
+      path: "/registerUser",
+      name: "RegisterUser",
+      component: RegisterUser,
+    },
+    {
+      path: "/forgotPassword",
+      name: "forgotPassword",
+      component: ForgotPassword,
     },
   ],
 });

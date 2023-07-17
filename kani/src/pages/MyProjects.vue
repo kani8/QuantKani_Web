@@ -11,9 +11,6 @@
             Quant<span>Kani</span>
           </router-link>
         </q-toolbar-title>
-
-        <!-- Sign In Button -->
-        <!-- Sign In Button -->
         <q-btn
           v-if="!loggedIn && $q.screen.width >= breakpoint"
           flat
@@ -24,11 +21,18 @@
           @click="signIn"
         ></q-btn>
         <!-- User's name -->
-        <span
-          v-if="loggedIn && $q.screen.width >= breakpoint"
-          class="user-name"
-        >
-          {{ user.value.name }}
+        <span v-if="user && $q.screen.width >= breakpoint" class="user-name">
+          {{ user.displayName.split(" ")[0] }}
+          <q-btn
+            v-if="user && $q.screen.width >= breakpoint"
+            flat
+            round
+            dense
+            class="q-ma-xs sign-out-btn"
+            @click="logOut"
+          >
+            <q-icon name="logout" />
+          </q-btn>
         </span>
         <q-btn
           v-if="$q.screen.width < breakpoint"
@@ -104,22 +108,30 @@
         </q-item>
       </q-list>
     </q-drawer>
-    <Admin v-if="isAdmin.value" />
+    <Admin v-if="isAdmin.valueOf()" />
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import Admin from "./Admin.vue";
 import state, { setTheme, toggleTheme } from "../assets/ts/theme";
 import { useRouter } from "vue-router";
+import useUserState from "../server/userState";
+
+interface User {
+  displayName: string;
+  email: string;
+  uid: string;
+  role: string;
+}
 
 export default defineComponent({
   data() {
     return {
       drawer: false,
       tab: 0,
-      breakpoint: 768, // Sets the breakpoint for the width threshold, e.g., 768px for tablets
+      breakpoint: 768, // Sets the breakpoint for the width threshold, for mobile devices
       drawerItems: [
         {
           title: "Home",
@@ -145,12 +157,6 @@ export default defineComponent({
           icon: "school",
           description: "Lessons",
         },
-        {
-          title: "Sign In",
-          link: "/signin",
-          icon: "login",
-          description: "Sign In",
-        },
       ],
     };
   },
@@ -158,13 +164,9 @@ export default defineComponent({
     Admin,
   },
   setup() {
-    const loggedIn = ref(false);
-    const user = ref({ role: "guest" }); // Add a ref for the user object
-    const router = useRouter();
+    const { user, isAdmin, loggedIn, logOut } = useUserState();
 
-    const isAdmin = computed(
-      () => loggedIn.value && user.value.role === "admin"
-    );
+    const router = useRouter();
 
     const applyTheme = () => {
       toggleTheme();
@@ -174,19 +176,20 @@ export default defineComponent({
       router.push("/signin");
     };
 
+    onMounted(() => {
+      if (!state.theme) {
+        setTheme("dark");
+      }
+    });
+
     return {
       loggedIn,
       isAdmin,
       applyTheme,
       signIn,
       user,
+      logOut,
     };
-  },
-
-  mounted() {
-    if (!state.theme) {
-      setTheme("dark");
-    }
   },
 });
 </script>
