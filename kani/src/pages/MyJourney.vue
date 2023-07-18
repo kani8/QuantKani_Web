@@ -11,7 +11,30 @@
             Quant<span>Kani</span>
           </router-link>
         </q-toolbar-title>
-
+        <!-- Sign In Button -->
+        <q-btn
+          v-if="!user && $q.screen.width >= breakpoint"
+          flat
+          round
+          dense
+          class="q-ma-xs sign-in-btn"
+          label="Sign In"
+          @click="signIn"
+        ></q-btn>
+        <!-- User's name -->
+        <span v-if="user && $q.screen.width >= breakpoint" class="user-name">
+          {{ user.displayName.split(" ")[0] }}
+          <q-btn
+            v-if="user && $q.screen.width >= breakpoint"
+            flat
+            round
+            dense
+            class="q-ma-xs sign-out-btn"
+            @click="logOut"
+          >
+            <q-icon name="logout" />
+          </q-btn>
+        </span>
         <q-btn
           v-if="$q.screen.width <= breakpoint"
           flat
@@ -19,7 +42,6 @@
           dense
           class="q-ma-xs"
           @click="drawer = !drawer"
-          aria-label="Toggle Sidebar"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -32,7 +54,6 @@
           dense
           class="q-ma-xs theme-toggle"
           @click="applyTheme"
-          aria-label="Toggle Theme"
         >
           <q-icon name="brightness_medium" />
         </q-btn>
@@ -59,23 +80,32 @@
       bordered
       :width="180"
       class="bg-black text-white"
-      hide-on-escape
     >
-      <q-list link style="font-size: 1.5em">
+      <q-list style="font-size: 1.5em">
         <q-item
           v-for="(item, index) in drawerItems"
           :key="index"
           class="drawer-item"
+          @click="drawerItemClicked(item)"
         >
           <q-item-section side>
-            <router-link :to="item.link">
-              <div class="icon-container drawer-item-logo">
+            <div
+              v-if="item.title !== 'Log out'"
+              class="icon-container drawer-item-logo"
+            >
+              <router-link :to="item.link">
                 <q-icon :name="item.icon" color="white" />
                 <span class="drawer-item-description">{{
                   item.description
                 }}</span>
-              </div>
-            </router-link>
+              </router-link>
+            </div>
+            <div v-else class="icon-container drawer-item-logo" @click="logOut">
+              <q-icon :name="item.icon" color="white" />
+              <span class="drawer-item-description">{{
+                item.description
+              }}</span>
+            </div>
           </q-item-section>
         </q-item>
         <q-item class="drawer-item theme-toggle-drawer-item">
@@ -101,21 +131,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import {
-  consoleText,
-  changeColor,
-  clearIntervals,
-} from "../../assets/ts/script";
-import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+import { defineComponent, onMounted, ref, computed } from "vue";
+import { consoleText, changeColor, clearIntervals } from "../assets/ts/script";
+import state, { setTheme, toggleTheme } from "../assets/ts/theme";
+import useUserState from "../server/userState";
+
+interface DrawerItem {
+  title: string;
+  link: string;
+  icon: string;
+  description: string;
+}
 
 export default defineComponent({
   data() {
     return {
       drawer: false,
       tab: 0,
-      breakpoint: 768, // Sets the breakpoint for the width threshold, e.g., 768px for tablets
-      drawerItems: [
+      breakpoint: 768,
+    };
+  },
+  setup() {
+    const { user, isAdmin, loggedIn, logOut } = useUserState();
+
+    const consoleMessage = computed(() => {
+      let greeting = user.value
+        ? `Welcome, ${
+            user.value.displayName ? user.value.displayName.split(" ")[0] : ""
+          }`
+        : "Welcome";
+      const texts = [greeting, "My name is Kanishk Vatsavayi", "Explore"];
+      let colors =
+        state.theme === "light"
+          ? ["black", "black", "black"]
+          : ["#fa0505", "#fa0505", "white"];
+      return { texts, colors };
+    });
+
+    const drawerItems = computed(() => {
+      let items: DrawerItem[] = [
         {
           title: "Home",
           link: "/",
@@ -140,15 +194,37 @@ export default defineComponent({
           icon: "school",
           description: "Lessons",
         },
-      ],
-    };
-  },
+      ];
+      if (!user.value) {
+        items.unshift({
+          title: "Sign In",
+          link: "/signin",
+          icon: "account_circle",
+          description: "Sign In",
+        });
+      } else {
+        items.unshift({
+          title: "Log out",
+          link: "/",
+          icon: "logout",
+          description: "Log out",
+        });
+      }
+      return items;
+    });
 
-  mounted() {
-    if (!state.theme) {
-      setTheme("dark");
-    }
-    consoleText(this.consoleMessage.texts, "text", this.consoleMessage.colors);
+    onMounted(() => {
+      if (!state.theme) {
+        setTheme("dark");
+      }
+      consoleText(
+        consoleMessage.value.texts,
+        "text",
+        consoleMessage.value.colors
+      );
+    });
+
+    return { user, consoleMessage, logOut, drawerItems };
   },
 
   methods: {
@@ -156,15 +232,17 @@ export default defineComponent({
       toggleTheme();
       changeColor(this.consoleMessage.colors);
     },
-  },
-  computed: {
-    consoleMessage(): { texts: string[]; colors: string[] } {
-      const texts = ["Welcome", "My name is Kanishk Vatsavayi", "Explore"];
-      let colors =
-        state.theme === "light"
-          ? ["black", "black", "black"]
-          : ["#fa0505", "#fa0505", "white"];
-      return { texts, colors };
+    signIn() {
+      this.$router.push("/signin");
+    },
+    drawerItemClicked(item: DrawerItem) {
+      if (item.title === "Log out") {
+        this.logOut().then(() => {
+          this.$router.push("/");
+        });
+      } else {
+        this.$router.push(item.link);
+      }
     },
   },
   beforeUnmount() {
@@ -173,4 +251,4 @@ export default defineComponent({
 });
 </script>
 
-<style src="../../assets/css/style.css"></style>
+<style src="../assets/css/style.css"></style>

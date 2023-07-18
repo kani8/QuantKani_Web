@@ -11,7 +11,29 @@
             Quant<span>Kani</span>
           </router-link>
         </q-toolbar-title>
-
+        <q-btn
+          v-if="!loggedIn && $q.screen.width >= breakpoint"
+          flat
+          round
+          dense
+          class="q-ma-xs sign-in-btn"
+          label="Sign In"
+          @click="signIn"
+        ></q-btn>
+        <!-- User's name -->
+        <span v-if="user && $q.screen.width >= breakpoint" class="user-name">
+          {{ user.displayName.split(" ")[0] }}
+          <q-btn
+            v-if="user && $q.screen.width >= breakpoint"
+            flat
+            round
+            dense
+            class="q-ma-xs sign-out-btn"
+            @click="logOut"
+          >
+            <q-icon name="logout" />
+          </q-btn>
+        </span>
         <q-btn
           v-if="$q.screen.width < breakpoint"
           flat
@@ -19,7 +41,6 @@
           dense
           class="q-ma-xs"
           @click="drawer = !drawer"
-          aria-label="Toggle Sidebar"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -32,15 +53,15 @@
           dense
           class="q-ma-xs theme-toggle"
           @click="applyTheme"
-          aria-label="Toggle Theme"
         >
           <q-icon name="brightness_medium" />
         </q-btn>
       </q-toolbar>
+
       <q-tabs
         v-model="tab"
         class="pages"
-        :style="$q.screen.gt.xs ? {} : { display: 'none' }"
+        :style="$q.screen.width > breakpoint ? {} : { display: 'none' }"
       >
         <router-link to="/projects">
           <q-tab name="Projects" label="Projects"></q-tab>
@@ -87,19 +108,30 @@
         </q-item>
       </q-list>
     </q-drawer>
+    <Admin v-if="isAdmin.valueOf()" />
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import state, { setTheme, toggleTheme } from "../../assets/ts/theme";
+import { defineComponent, ref, onMounted } from "vue";
+import Admin from "./Admin.vue";
+import state, { setTheme, toggleTheme } from "../assets/ts/theme";
+import { useRouter } from "vue-router";
+import useUserState from "../server/userState";
+
+interface User {
+  displayName: string;
+  email: string;
+  uid: string;
+  role: string;
+}
 
 export default defineComponent({
   data() {
     return {
       drawer: false,
       tab: 0,
-      breakpoint: 768, // Set the breakpoint for the width threshold, e.g., 768px for tablets
+      breakpoint: 768, // Sets the breakpoint for the width threshold, for mobile devices
       drawerItems: [
         {
           title: "Home",
@@ -128,19 +160,38 @@ export default defineComponent({
       ],
     };
   },
-
-  mounted() {
-    if (!state.theme) {
-      setTheme("dark");
-    }
+  components: {
+    Admin,
   },
+  setup() {
+    const { user, isAdmin, loggedIn, logOut } = useUserState();
 
-  methods: {
-    applyTheme() {
+    const router = useRouter();
+
+    const applyTheme = () => {
       toggleTheme();
-    },
+    };
+
+    const signIn = () => {
+      router.push("/signin");
+    };
+
+    onMounted(() => {
+      if (!state.theme) {
+        setTheme("dark");
+      }
+    });
+
+    return {
+      loggedIn,
+      isAdmin,
+      applyTheme,
+      signIn,
+      user,
+      logOut,
+    };
   },
 });
 </script>
 
-<style src="../../assets/css/style.css"></style>
+<style src="../assets/css/style.css"></style>
