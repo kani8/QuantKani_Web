@@ -1,12 +1,10 @@
 import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user";
 import blogRoutes from "./routes/blog";
 
 const app = express();
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
