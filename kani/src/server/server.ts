@@ -3,8 +3,14 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user";
 import blogRoutes from "./routes/blog";
+import cors from "cors";
 
 const app = express();
+const corsOptions = {
+  origin: "https://quantkani.com",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
