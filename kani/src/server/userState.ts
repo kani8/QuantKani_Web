@@ -1,7 +1,6 @@
 import { reactive, toRefs, computed } from "vue";
 import { auth } from "../server/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 interface User {
   displayName: string;
@@ -12,13 +11,17 @@ interface User {
 
 const state = reactive({ user: null as User | null, isAdmin: false });
 
+const adminUIDs = ["RThCIcF1WTZRT00EbR6gIOdIj3X2"]; // List of all the admin UIDs
+
 onAuthStateChanged(auth, (userAuth) => {
   if (userAuth) {
+    const userRole = adminUIDs.includes(userAuth.uid) ? "admin" : "guest";
+
     state.user = {
       displayName: userAuth.displayName || "",
       email: userAuth.email || "",
       uid: userAuth.uid,
-      role: "guest", // Update as per your logic
+      role: userRole,
     };
     state.isAdmin = state.user.role === "admin";
   } else {

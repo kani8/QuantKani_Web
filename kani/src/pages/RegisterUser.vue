@@ -112,8 +112,6 @@ import {
 import { auth } from "../server/firebase";
 import axios from "axios";
 import { FirebaseError } from "firebase/app";
-import { useQuasar } from "quasar";
-import { Dialog } from "quasar";
 
 export default defineComponent({
   setup() {
@@ -123,7 +121,6 @@ export default defineComponent({
     const password = ref("");
     const confirmPassword = ref("");
     const router = useRouter();
-    const $q = useQuasar();
     const dialogVisible = ref(false);
     const dialogMessage = ref("");
 
@@ -132,6 +129,11 @@ export default defineComponent({
         case "auth/email-already-in-use":
           dialogMessage.value =
             "The email address is already in use by another account.";
+          dialogVisible.value = true;
+          break;
+        case "auth/weak-password":
+          dialogMessage.value =
+            "The password must be at least 6 characters long.";
           dialogVisible.value = true;
           break;
         default:

@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema({
   uid: { type: String, required: true },
   displayName: { type: String, required: true },
   email: { type: String, required: true },
+  role: { type: String, default: "guest" },
 });
 
 export default mongoose.model("User", UserSchema);

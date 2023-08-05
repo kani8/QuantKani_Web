@@ -96,7 +96,19 @@ export default defineComponent({
       } catch (error) {
         const firebaseError = error as FirebaseError;
         console.error("Error signing in: ", firebaseError);
-        handleRegistrationError(firebaseError);
+        handleSignInError(firebaseError);
+      }
+    };
+
+    const handleSignInError = (error: FirebaseError) => {
+      switch (error.code) {
+        case "auth/wrong-password":
+        case "auth/user-not-found":
+          dialogMessage.value = "Incorrect email or password.";
+          dialogVisible.value = true;
+          break;
+        default:
+          console.error("Error signing in: ", error);
       }
     };
 
@@ -111,16 +123,12 @@ export default defineComponent({
         handleRegistrationError(firebaseError);
       }
     };
+
     const handleRegistrationError = (error: FirebaseError) => {
       switch (error.code) {
         case "auth/email-already-in-use":
           dialogMessage.value =
             "The email address is already in use by another account.";
-          dialogVisible.value = true;
-          break;
-        case "auth/wrong-password":
-        case "auth/user-not-found":
-          dialogMessage.value = "Incorrect email or password.";
           dialogVisible.value = true;
           break;
         default:

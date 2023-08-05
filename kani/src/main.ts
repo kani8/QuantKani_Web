@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Journey from "./pages/MyJourney.vue";
 import Projects from "./pages/MyProjects.vue";
-import Lessons from "./pages/LessonsPage.vue";
+import Experience from "./pages/LessonsPage.vue";
 import Books from "./pages/BookList.vue";
 import Signin from "./pages/SignIn.vue";
 import RegisterUser from "./pages/RegisterUser.vue";
@@ -32,11 +32,11 @@ const router = createRouter({
       },
     },
     {
-      path: "/lessons",
-      name: "lessons",
-      component: Lessons,
+      path: "/experience",
+      name: "experience",
+      component: Experience,
       meta: {
-        title: "Lessons",
+        title: "Experience",
       },
     },
     {

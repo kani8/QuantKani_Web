@@ -69,8 +69,8 @@
         <router-link to="/books">
           <q-tab name="Books" label="Books"></q-tab>
         </router-link>
-        <router-link to="/lessons">
-          <q-tab name="Lessons" label="Lessons"></q-tab>
+        <router-link to="/experience">
+          <q-tab name="Experience" label="Experience"></q-tab>
         </router-link>
       </q-tabs>
     </q-header>
@@ -131,7 +131,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed } from "vue";
+import { defineComponent, onMounted, computed } from "vue";
 import { consoleText, changeColor, clearIntervals } from "../assets/ts/script";
 import state, { setTheme, toggleTheme } from "../assets/ts/theme";
 import useUserState from "../server/userState";
@@ -152,14 +152,17 @@ export default defineComponent({
     };
   },
   setup() {
-    const { user, isAdmin, loggedIn, logOut } = useUserState();
+    const { user, logOut } = useUserState();
 
     const consoleMessage = computed(() => {
-      let greeting = user.value
-        ? `Welcome, ${
-            user.value.displayName ? user.value.displayName.split(" ")[0] : ""
-          }`
-        : "Welcome";
+      let greeting =
+        user.value &&
+        user.value.displayName &&
+        user.value.displayName.trim().length > 0
+          ? `Welcome, ${
+              user.value.displayName ? user.value.displayName.split(" ")[0] : ""
+            }`
+          : "Welcome";
       const texts = [greeting, "My name is Kanishk Vatsavayi", "Explore"];
       let colors =
         state.theme === "light"
@@ -189,10 +192,10 @@ export default defineComponent({
           description: "Books",
         },
         {
-          title: "Lessons",
-          link: "/lessons",
-          icon: "school",
-          description: "Lessons",
+          title: "Experience",
+          link: "/experience",
+          icon: "man",
+          description: "Experience",
         },
       ];
       if (!user.value) {
@@ -252,3 +255,4 @@ export default defineComponent({
 </script>
 
 <style src="../assets/css/style.css"></style>
+//Styling for entire project

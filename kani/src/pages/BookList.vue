@@ -69,8 +69,8 @@
         <router-link to="/books">
           <q-tab name="Books" label="Books"></q-tab>
         </router-link>
-        <router-link to="/lessons">
-          <q-tab name="Lessons" label="Lessons"></q-tab>
+        <router-link to="/experience">
+          <q-tab name="Experience" label="Experience"></q-tab>
         </router-link>
       </q-tabs>
     </q-header>
@@ -108,25 +108,22 @@
         </q-item>
       </q-list>
     </q-drawer>
-    <Admin v-if="isAdmin.valueOf()" />
+    <PostsByCategory category="books" @postCreated="fetchPosts" />
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
-import Admin from "./Admin.vue";
+import { defineComponent, reactive, onMounted, ref } from "vue";
 import state, { setTheme, toggleTheme } from "../assets/ts/theme";
 import { useRouter } from "vue-router";
 import useUserState from "../server/userState";
-
-interface User {
-  displayName: string;
-  email: string;
-  uid: string;
-  role: string;
-}
+import { NewPost, usePosts } from "../server/usePosts";
+import PostsByCategory from "./PostsByCategory.vue";
 
 export default defineComponent({
+  components: {
+    PostsByCategory,
+  },
   data() {
     return {
       drawer: false,
@@ -152,19 +149,33 @@ export default defineComponent({
           description: "Books",
         },
         {
-          title: "Lessons",
-          link: "/lessons",
-          icon: "school",
-          description: "Lessons",
+          title: "Experience",
+          link: "/experience",
+          icon: "man",
+          description: "Experience",
         },
       ],
     };
   },
-  components: {
-    Admin,
-  },
   setup() {
     const { user, isAdmin, loggedIn, logOut } = useUserState();
+    const { posts, createPost, fetchPosts, editPost, deletePost } = usePosts();
+    const newPost = reactive<NewPost>({
+      uid: "",
+      author: "",
+      title: "",
+      content: "",
+      category: "",
+    });
+
+    const currentPost = ref<NewPost | null>(null);
+
+    const updatePost = () => {
+      if (currentPost.value && currentPost.value._id) {
+        // Ensures _id is available
+        editPost(currentPost.value._id, currentPost.value);
+      }
+    };
 
     const router = useRouter();
 
@@ -176,10 +187,23 @@ export default defineComponent({
       router.push("/signin");
     };
 
+    const createNewPost = () => {
+      // ensure newPost has a category before trying to create a post
+      if (newPost.title && newPost.content && newPost.category) {
+        createPost(newPost);
+        newPost.title = "";
+        newPost.content = "";
+      } else {
+        // handle error when not all fields are filled
+        console.error("All fields must be filled to create a new post.");
+      }
+    };
+
     onMounted(() => {
       if (!state.theme) {
         setTheme("dark");
       }
+      fetchPosts();
     });
 
     return {
@@ -189,9 +213,21 @@ export default defineComponent({
       signIn,
       user,
       logOut,
+      posts,
+      newPost,
+      createNewPost,
+      editPost,
+      deletePost,
+      fetchPosts,
+      currentPost,
+      updatePost,
     };
   },
 });
 </script>
 
-<style src="../assets/css/style.css"></style>
+<style scoped>
+.q-layout {
+  padding-top: 8rem;
+}
+</style>
