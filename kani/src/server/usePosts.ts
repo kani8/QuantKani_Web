@@ -35,7 +35,7 @@ export function usePosts() {
   const fetchPosts = async () => {
     try {
       const response = await axios.get<Post[]>(
-        "http://13.58.231.183:5000/api/blogs/s"
+        "https://api.quantkani.com/api/blogs"
       );
       posts.value = response.data;
     } catch (error) {
@@ -45,7 +45,7 @@ export function usePosts() {
 
   const createPost = async (post: NewPost) => {
     const response = await axios.post<Post>(
-      "http://13.58.231.183:5000/api/blogs/",
+      "https://api.quantkani.com/api/blogs",
       post
     );
     posts.value.push(response.data);
@@ -53,7 +53,7 @@ export function usePosts() {
 
   const editPost = async (id: string, updatedPost: NewPost) => {
     const response = await axios.put<Post>(
-      `http://13.58.231.183:5000/api/blogs/${id}`,
+      `https://api.quantkani.com/api/blogs/${id}`,
       updatedPost
     );
     const index = posts.value.findIndex((post: Post) => post._id === id);
@@ -61,7 +61,7 @@ export function usePosts() {
   };
 
   const deletePost = async (id: string) => {
-    await axios.delete(`http://13.58.231.183:5000/api/blogs/${id}`);
+    await axios.delete(`https://api.quantkani.com/api/blogs/${id}`);
     posts.value = posts.value.filter((post: Post) => post._id !== id);
   };
 
