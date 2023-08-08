@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "ts-node server/app.ts",
     "devStart": "nodemon src/server/server.ts",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -30,7 +31,7 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
-    "quasar": "^2.0.0",
+    "quasar": "^2.12.4",
     "vue": "^3.2.45",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.1.6",
