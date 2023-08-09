@@ -7,7 +7,7 @@ import cors from "cors";
 
 const app = express();
 const corsOptions = {
-  origin: ["https://quantkani.com", "https://www.quantkani.com"],
+  origin: ["*"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
