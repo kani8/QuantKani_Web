@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "prettier": "prettier --write '**/*.{js,json,css,scss,html,vue,ts}' --fix",
     "start-api": "node server/app.ts",
-    "dev": "concurrently \"npm run serve\" \"npm run start-api\""
+    "dev": "concurrently \"npm run serve\" \"cd src/server && npx nodemon --exec ts-node server.ts\""
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
