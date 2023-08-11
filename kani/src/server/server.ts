@@ -3,17 +3,17 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user";
 import blogRoutes from "./routes/blog";
-import cors from "cors";
+//import cors from "cors";
 
 const app = express();
-const corsOptions = {
+/*const corsOptions = {
   origin: ["*"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
-};
+};*/
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
