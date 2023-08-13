@@ -48,7 +48,7 @@ export function usePosts() {
 
   const editPost = async (id: string, updatedPost: NewPost) => {
     const response = await axios.put<Post>(
-      `https://api.quantkani.com//${id}`,
+      `https://api.quantkani.com/${id}`,
       updatedPost
     );
     const index = posts.value.findIndex((post: Post) => post._id === id);

@@ -158,7 +158,7 @@ export default defineComponent({
 
         await updateProfile(user, { displayName });
 
-        await axios.post("http://localhost:5000/user/register", {
+        await axios.post("https://api.quantkani.com/user/register", {
           uid: user.uid,
           displayName,
           email: email.value,
