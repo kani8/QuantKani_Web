@@ -34,7 +34,9 @@ export function usePosts() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get<Post[]>("https://api.quantkani.com/");
+      const response = await axios.get<Post[]>(
+        "https://api.quantkani.com/api/blogs/"
+      );
       posts.value = response.data;
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -42,13 +44,16 @@ export function usePosts() {
   };
 
   const createPost = async (post: NewPost) => {
-    const response = await axios.post<Post>("https://api.quantkani.com/", post);
+    const response = await axios.post<Post>(
+      "https://api.quantkani.com/api/blogs/",
+      post
+    );
     posts.value.push(response.data);
   };
 
   const editPost = async (id: string, updatedPost: NewPost) => {
     const response = await axios.put<Post>(
-      `https://api.quantkani.com/${id}`,
+      `https://api.quantkani.com/api/blogs/${id}`,
       updatedPost
     );
     const index = posts.value.findIndex((post: Post) => post._id === id);
@@ -56,7 +61,7 @@ export function usePosts() {
   };
 
   const deletePost = async (id: string) => {
-    await axios.delete(`https://api.quantkani.com/${id}`);
+    await axios.delete(`hhttps://api.quantkani.com/api/blogs/${id}`);
     posts.value = posts.value.filter((post: Post) => post._id !== id);
   };
 
